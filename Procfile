@@ -1,0 +1,1 @@
+web: java -jar target/10ScoreBot-1.0-SNAPSHOT.jar

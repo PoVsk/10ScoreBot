@@ -8,7 +8,7 @@ public class Phrase {
 
     @DatabaseField(columnName = "text")
     private String text;
-    @DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = "response_id")
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, index = true, columnName = "response_id")
     private Response response;
 
     public String getText() {
