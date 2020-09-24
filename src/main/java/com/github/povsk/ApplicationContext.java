@@ -52,6 +52,7 @@ public class ApplicationContext implements AutoCloseable {
     }
 
     private void configureProperties() {
+        System.getenv().forEach((k, v) -> System.out.println("key:" + k + " value: " + v));
         Integer groupId = gerGroupId();
         String token = gerToken();
         String errorMessage = "";
