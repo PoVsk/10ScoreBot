@@ -7,11 +7,8 @@ import com.github.povsk.vk.VKCore;
 import com.github.povsk.vk.VKManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.Objects;
 
 public class ApplicationContext implements AutoCloseable {
 
@@ -54,11 +51,40 @@ public class ApplicationContext implements AutoCloseable {
     ApplicationContext() throws Exception {
     }
 
-    private void configureProperties() throws IOException {
-        Yaml yaml = new Yaml(new Constructor(AppProperties.class));
-        try (InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("application.yml")) {
-            properties = yaml.load(inputStream);
+    private void configureProperties() {
+        Integer groupId = gerGroupId();
+        String token = gerToken();
+        String errorMessage = "";
+        if (groupId == null) {
+            errorMessage += "GroupId bot must not be null;\n";
         }
+        if (isEmpty(token)) {
+            errorMessage += "Token bot must not be null;\n";
+        }
+        if (!isEmpty(errorMessage)) {
+            errorMessage += "Use environment variable's \"GROUP_ID\", \"TOKEN\" for it";
+            throw new AssertionError(errorMessage);
+        }
+        properties = new AppProperties();
+        properties.setGroupId(groupId);
+        properties.setToken(token);
+    }
+
+    private Integer gerGroupId() {
+        String groupIdStr = System.getenv("GROUP_ID");
+        try {
+            return Integer.parseInt(groupIdStr);
+        } catch (NumberFormatException ignore) {
+            return null;
+        }
+    }
+
+    private String gerToken() {
+        return System.getenv("TOKEN");
+    }
+
+    private boolean isEmpty(String value) {
+        return Objects.isNull(value) || value.isEmpty();
     }
 
     private void configureDaoManager() throws Exception {
