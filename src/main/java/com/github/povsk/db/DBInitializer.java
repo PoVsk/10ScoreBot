@@ -36,6 +36,11 @@ public class DBInitializer {
         Response response = new Response();
         response.setGroupBot(groupBot);
         response.setText("Добро пожаловать в группу");
+        response.setText("Я чувствую себя живым?");
+        response.setText("Хочу пригасить Вас на виртуальную чашку кофе");
+        response.setText("У меня есть одно очень занимательное видео: https://www.youtube.com/watch?v=SW_UCzFO7X0&list=PLawfWYMUziZqyUL5QDLVbe3j5BKWj42E5&index=2");
+        response.setText("Самое время поесть и поиграть в теннис на первом этаже");
+        response.setText("Девочка покорившая время");
         responseDao.create(response);
 
         Phrase phrase = new Phrase();
@@ -48,6 +53,26 @@ public class DBInitializer {
         phraseDao.create(phrase);
         phrase = new Phrase();
         phrase.setText("день");
+        phrase.setResponse(response);
+        phraseDao.create(phrase);
+        phrase = new Phrase();
+        phrase.setText("чувствуешь");
+        phrase.setResponse(response);
+        phraseDao.create(phrase);
+        phrase = new Phrase();
+        phrase.setText("кофе");
+        phrase.setResponse(response);
+        phraseDao.create(phrase);
+        phrase = new Phrase();
+        phrase.setText("скука");
+        phrase.setResponse(response);
+        phraseDao.create(phrase);
+        phrase = new Phrase();
+        phrase.setText("час");
+        phrase.setResponse(response);
+        phraseDao.create(phrase);
+        phrase = new Phrase();
+        phrase.setText("фильм");
         phrase.setResponse(response);
         phraseDao.create(phrase);
     }
