@@ -62,11 +62,11 @@ public class DBInitializer {
         phrase.setText("Привет");
         phrase.setResponse(response);
         phraseDao.create(phrase);
-        Phrase phrase = new Phrase();
+        phrase = new Phrase();
         phrase.setText("Добрый");
         phrase.setResponse(response);
         phraseDao.create(phrase);
-        Phrase phrase = new Phrase();
+        phrase = new Phrase();
         phrase.setText("день");
         phrase.setResponse(response);
         phraseDao.create(phrase);
